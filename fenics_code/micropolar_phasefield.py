@@ -69,8 +69,8 @@ mesh_ymax  = max(mesh_coord[:,1])
 # ---------------------------------------------------------------- 
 # Define function spaces
 # ----------------------------------------------------------------
-u_elem     = VectorElement('Lagrange', mesh.ufl_cell(), 2) # displacement
-theta_elem = FiniteElement('Lagrange', mesh.ufl_cell(), 1) # rotation
+u_elem     = VectorElement('CG', mesh.ufl_cell(), 2) # displacement
+theta_elem = FiniteElement('CG', mesh.ufl_cell(), 1) # rotation
 
 mixedUT = u_elem*theta_elem
 
@@ -322,6 +322,9 @@ def g_d_prime(d):
 eta, xi = TestFunctions(V)
 zeta    = TestFunction(W)
 
+del_x = TrialFunction(V)
+del_d = TrialFunction(W)
+
 x_new = Function(V)
 u_new, theta_new = split(x_new)
 
@@ -332,9 +335,6 @@ d_new = Function(W)
 d_old = Function(W) 
 
 H_old = Function(W)
-
-del_x = TrialFunction(V)
-del_d = TrialFunction(W)
 
 # Weak form: balance equations
 if degradation == 'B':
@@ -457,7 +457,7 @@ while t <= t_f:
     
     # compute error norms
     print(' ')
-    print('[Computing error norms...]')   
+    print('[Computing residuals...]')   
     u_new, theta_new = x_new.split()
     u_old, theta_old = x_old.split()
 
