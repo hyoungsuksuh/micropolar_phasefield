@@ -14,7 +14,7 @@ Convert .msh file into .xml file by using 'dolfin-convert' command in the Termin
 3. Running the python code 
 Generate a folder at the same level as the python script, and place your mesh file (.xml) there.
 Notice that the generated folder and the converted mesh file should have the same filename.
-Type 'python micropolar_phasefield.py' in the Terminal to run the script. 
+Type 'python micropolar_elasticity.py' or 'python micropolar_phasefield.py' in the Terminal to run the script. 
 
 4. Post-processing
 The script saves the results in ParaView files (.pvd).
